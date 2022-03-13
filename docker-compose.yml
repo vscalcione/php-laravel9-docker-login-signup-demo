@@ -13,3 +13,16 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ./app:/app
+  mysql:
+    image: mariadb:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: "secret"
+      MYSQL_USER: "tutorial"
+      MYSQL_PASSWORD: "secret"
+      MYSQL_DATABASE: "tutorialdb"
+    volumes:
+      - mysqldata:/var/lib/mysql
+    ports:
+      - 3306:3306
+volumes:
+  mysqldata: {}
