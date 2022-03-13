@@ -1,12 +1,16 @@
 <?php
 
+$server_name = 'mysql';
 $username = 'tutorial';
 $password = 'secret';
+$db_name = 'tutorialdb';
 
-$pdo = new PDO('mysql:dbname=tutorialdb;host=mysql', $username, $password, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
-
-$query = $pdo->query('SHOW VARIABLES like "version"');
-$row = $query->fetch();
-echo 'MySQL version: '.$row['Value'];
+try {
+    $connection = new PDO("mysql:host=$server_name;dbname=$db_name", $username, $password);
+    $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    echo "Connection successfully done!";
+} catch (PDOException $e) {
+    echo "Connection failed: ".$e->getMessage();
+}
 
 ?>
